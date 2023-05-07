@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 爬虫使用说明书V1.0
 1、解压zip
 解压bgyfw.7z至任意目录后，进入bgyfw\hghSpider\venv\Scripts目录下，如下图
@@ -13,3 +14,7 @@
 
 
 输入python -m begin.py开始执行爬虫
+=======
+# bgyfw
+导出bgy后台系统的一些数据
+>>>>>>> 2d137c525965f5b850ef1b3f1a164da13bc6a848
