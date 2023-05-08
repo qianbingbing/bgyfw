@@ -6,6 +6,7 @@ import time
 import requests
 import base64
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from hghSpider.settings import DEFAULT_REQUEST_HEADERS
 from webdriver_manager.chrome import ChromeDriverManager
 import datetime
@@ -97,21 +98,21 @@ class HghSpider(Spider):
     def login(self,webdriver):
         webdriver.get('https://nbc-sup.bgyfw.com/#/home/index')
         webdriver.refresh()
-        login_content = webdriver.find_element_by_class_name('login-content')
-        login_content.find_element_by_xpath('//div[1]/div/div/span/input').clear()
-        login_content.find_element_by_xpath('//div[1]/div/div/span/input').send_keys('china_dragon')
-        login_content.find_element_by_xpath('//div[2]/div/div/span/input').clear()
-        login_content.find_element_by_xpath('//div[2]/div/div/span/input').send_keys('WEIyx888')
-        login_content.find_element_by_xpath('//div[3]/div[2]/img').click()
+        login_content = webdriver.find_element(By.CLASS_NAME,'login-content')
+        login_content.find_element(By.XPATH,'//div[1]/div/div/span/input').clear()
+        login_content.find_element(By.XPATH,'//div[1]/div/div/span/input').send_keys('china_dragon')
+        login_content.find_element(By.XPATH,'//div[2]/div/div/span/input').clear()
+        login_content.find_element(By.XPATH,'//div[2]/div/div/span/input').send_keys('WEIyx888')
+        login_content.find_element(By.XPATH,'//div[3]/div[2]/img').click()
         time.sleep(2)
-        img_base64 = login_content.find_element_by_xpath('//div[3]/div[2]/img').get_attribute('src')
+        img_base64 = login_content.find_element(By.XPATH,'//div[3]/div[2]/img').get_attribute('src')
         img_imf = img_base64.replace("data:image/jpg;base64", '')
         page_content = base64.b64decode(img_imf)
         ocr = ddddocr.DdddOcr()
         code = ocr.classification(page_content)
         print(code.lower())
-        login_content.find_element_by_xpath('//div[3]/div[1]/div/div/div/span/input').send_keys(code)
-        webdriver.find_element_by_xpath("//button[@type='button']").click()
+        login_content.find_element(By.XPATH,'//div[3]/div[1]/div/div/div/span/input').send_keys(code)
+        webdriver.find_element(By.XPATH,"//button[@type='button']").click()
         time.sleep(5)
 
     def get_pdOrderItemVaule(self,pdOrderItem):
